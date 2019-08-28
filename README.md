@@ -1,3 +1,5 @@
+WORK IN PROGRESS
+
 SolidusOpeningClosingTimes
 ==========================
 
@@ -9,7 +11,7 @@ Installation
 Add solidus_opening_closing_times to your Gemfile:
 
 ```ruby
-gem 'solidus_opening_closing_times'
+gem 'solidus_opening_closing_times', github: "buttercloud/solidus_opening_closing_times"
 ```
 
 Bundle your dependencies and run the installation generator:
