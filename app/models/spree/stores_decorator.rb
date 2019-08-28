@@ -87,22 +87,26 @@ Spree::Store.class_eval do
     today = Date.today.strftime("%A").downcase
     now = Time.now
 
-    objs = opening_closing_times_and_days[today]
+    if opening_closing_times_and_days
+      objs = opening_closing_times_and_days[today]
 
-    if objs
-      objs.any? do |obj|
-        start_hour = obj["start_hour"].to_i
-        start_min = obj["start_min"].to_i
-        end_hour = obj["end_hour"].to_i
-        end_min = obj["end_min"].to_i
+      if objs
+        objs.any? do |obj|
+          start_hour = obj["start_hour"].to_i
+          start_min = obj["start_min"].to_i
+          end_hour = obj["end_hour"].to_i
+          end_min = obj["end_min"].to_i
 
-        start_time = Time.parse("#{start_hour}:#{start_min}")
-        end_time = Time.parse("#{end_hour}:#{end_min}")
+          start_time = Time.parse("#{start_hour}:#{start_min}")
+          end_time = Time.parse("#{end_hour}:#{end_min}")
 
-        (now >= start_time) && (now <= end_time)
+          (now >= start_time) && (now <= end_time)
+        end
+      else
+        false
       end
     else
-      false
+      true
     end
   end
 end
