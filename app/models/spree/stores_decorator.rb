@@ -98,7 +98,7 @@ Spree::Store.class_eval do
 
   def currently_open?
     today = Date.today.strftime("%A").downcase
-    now = Time.now
+    now = Time.now.utc
 
     if opening_closing_times_and_days
       objs = opening_closing_times_and_days[today]
