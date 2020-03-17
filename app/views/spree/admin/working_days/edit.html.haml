@@ -1,0 +1,33 @@
+= render 'spree/admin/shared/general_tabs'
+
+.working_hours#edit
+  .container
+    %h1= @working_day.name
+    %h4= "- #{@working_day.description}"
+    %p.text-dagner= "All times are in utc"
+    %p.text-dagner= "Current time in UTC: #{Time.now.utc.to_s(:hour_minute)}"
+    .row
+      .col-3= "#"
+      .col-3= "Start time"
+      .col-3= "End Time"
+      .col-3= ""
+
+    - @working_day.working_hours.each_with_index do |wh, index|
+      .row
+        .col-3= index + 1
+        .col-3= wh.start_time.to_s(:hour_minute_am_pm)
+        .col-3= wh.end_time.to_s(:hour_minute_am_pm)
+        .col-3
+          = link_to "Destroy", admin_store_working_day_working_hour_path(@store.id, @working_day, wh.id), class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure ?"}
+          = # link_to "Update", admin_store_working_day_working_hour_path(@store.id, @working_day, wh.id), class: "btn btn-warning", method: :patch
+    %br
+    %br
+    = form_for @working_day.working_hours.new, url: admin_store_working_day_working_hours_path(@store, @working_day) do |f|
+      = f.label :start_time
+      = f.time_select :start_time, default: Time.now.utc
+      %br
+      = f.label :end_time
+      = f.time_select :end_time, default: Time.now.utc + 1.hour
+      %br
+      = f.submit :add
+

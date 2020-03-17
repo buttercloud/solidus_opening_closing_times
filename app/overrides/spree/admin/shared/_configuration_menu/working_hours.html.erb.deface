@@ -1,0 +1,2 @@
+<!-- insert_bottom "[data-hook='admin_configurations_sidebar_menu']" -->
+<%= configurations_sidebar_menu_item Spree.t(:'working_days'), admin_store_working_days_path(current_store.id)  if can? :manage, Spree::Store %>
