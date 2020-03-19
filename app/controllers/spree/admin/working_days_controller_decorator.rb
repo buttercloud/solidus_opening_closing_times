@@ -6,7 +6,7 @@ class Spree::Admin::WorkingDaysController < Spree::Admin::BaseController
 
   def create
     working_day = @store.working_days.new(working_day_params)
-    working_day.save
+    flash[:error] = working_day.errors.full_messages.join(", ") if !working_day.save
     redirect_to admin_store_working_days_path(@store)
   end
 

@@ -4,6 +4,10 @@
   .container
     %h1= @working_day.name
     %h4= "- #{@working_day.description}"
+    %span= "Current time in UTC: #{DateTime.now.utc}"
+    %br
+    %span= "Current time locally: "
+    %span#local_time= ""
     .row
       .col-3= "#"
       .col-3= "Start time"
@@ -20,6 +24,7 @@
           = # link_to "Update", admin_store_working_day_working_hour_path(@store.id, @working_day, wh.id), class: "btn btn-warning", method: :patch
     %br
     %br
+    %span= "* All times ares stored in UTC format!"
     = form_for @working_day.working_hours.new, url: admin_store_working_day_working_hours_path(@store, @working_day) do |f|
       = f.label :start_time
       = f.time_select :start_time
@@ -29,3 +34,23 @@
       %br
       = f.submit :add
 
+:javascript
+  Number.prototype.padLeft = function(base,chr){
+    var  len = (String(base || 10).length - String(this).length)+1;
+    return len > 0? new Array(len).join(chr || '0')+this : this;
+  }
+
+  function formatDate(d) {
+    dformat = [d.getFullYear(),
+              (d.getMonth()+1).padLeft(),
+               d.getDate().padLeft()].join('-') +' ' +
+              [d.getHours().padLeft(),
+               d.getMinutes().padLeft(),
+               d.getSeconds().padLeft()].join(':');
+    return (dformat)
+  }
+
+  $(document).ready(function(){
+    let current_time = new Date()
+    $("span#local_time").html(formatDate(current_time))
+  })
