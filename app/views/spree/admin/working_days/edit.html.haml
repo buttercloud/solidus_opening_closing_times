@@ -4,8 +4,6 @@
   .container
     %h1= @working_day.name
     %h4= "- #{@working_day.description}"
-    %p.text-dagner= "All times are in utc"
-    %p.text-dagner= "Current time in UTC: #{Time.now.utc.to_s(:hour_minute)}"
     .row
       .col-3= "#"
       .col-3= "Start time"
@@ -24,10 +22,10 @@
     %br
     = form_for @working_day.working_hours.new, url: admin_store_working_day_working_hours_path(@store, @working_day) do |f|
       = f.label :start_time
-      = f.time_select :start_time, default: Time.now.utc
+      = f.time_select :start_time
       %br
       = f.label :end_time
-      = f.time_select :end_time, default: Time.now.utc + 1.hour
+      = f.time_select :end_time
       %br
       = f.submit :add
 
