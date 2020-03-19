@@ -1,4 +1,5 @@
 Spree::Store.class_eval do
+  validates_numericality_of :number_of_hours_allowed_before_placing_order, greater_than_or_equal_to: 0, allow_blank: true
   has_many :working_days
 
   def currently_open?

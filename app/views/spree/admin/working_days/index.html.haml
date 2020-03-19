@@ -16,3 +16,9 @@
       = f.label :day_name
       = f.select :name, Date::DAYNAMES - @store.working_days.map(&:name)
       = f.submit :add
+
+    = form_for [:admin, @store] do |f|
+      = f.label :number_of_hours_allowed_before_placing_order
+      = f.number_field :number_of_hours_allowed_before_placing_order, step: 0.5
+      = f.submit :update, class: "btn btn-warning"
+    %br
