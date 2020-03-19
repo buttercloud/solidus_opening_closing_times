@@ -8,7 +8,7 @@ class Spree::WorkingDay < ApplicationRecord
 
   def currently_operating?
     working_hours.each do |wh|
-      return true if (Time.now.utc >= wh.start_time.utc && wh.end_time.utc <= Time.now.utc)
+      return true if (Time.now.utc >= wh.start_time.utc && Time.now.utc <= wh.end_time.utc)
     end
 
     false
