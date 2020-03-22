@@ -1,6 +1,7 @@
 module SolidusOpeningClosingTimes
   class Engine < Rails::Engine
     require 'spree/core'
+    require 'spree/backend'
     isolate_namespace Spree
     engine_name 'solidus_opening_closing_times'
 

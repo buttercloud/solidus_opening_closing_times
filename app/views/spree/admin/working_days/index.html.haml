@@ -1,0 +1,24 @@
+= render 'spree/admin/shared/general_tabs'
+
+.working_days#index
+  .container
+    - @store.working_days.each_with_index do |wd, index|
+      .row
+        .col-1= index + 1
+        .col-2= wd.name
+        .col-6= wd.description
+        .col-3
+          = link_to "Destroy", admin_store_working_day_path(@store.id, wd.id), class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure ?"}
+          = link_to "Edit", edit_admin_store_working_day_path(@store.id, wd.id), class: "btn btn-warning"
+    %br
+    %br  
+    = form_for [:admin, :store, @store.working_days.new] do |f|
+      = f.label :day_name
+      = f.select :name, Date::DAYNAMES - @store.working_days.map(&:name)
+      = f.submit :add
+
+    = form_for [:admin, @store] do |f|
+      = f.label :number_of_hours_allowed_before_placing_order
+      = f.number_field :number_of_hours_allowed_before_placing_order, step: 0.5
+      = f.submit :update, class: "btn btn-warning"
+    %br

@@ -3,3 +3,6 @@
 
 en:
   hello: Hello world
+  spree:
+    working_days: Working Days
+    working_hours: Working Hours
