@@ -3,7 +3,7 @@ Spree::Core::Engine.routes.draw do
   namespace :admin do
     resources :stores do
       resources :working_days, only: [:index, :create, :edit, :destroy] do
-        resources :working_hours, only: [:create, :destroy]
+        resources :working_hours, only: [:create, :destroy, :update]
       end
     end
   end

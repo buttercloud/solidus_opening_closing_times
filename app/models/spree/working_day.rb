@@ -6,7 +6,7 @@ class Spree::WorkingDay < ApplicationRecord
   validates :name, inclusion: { in: Date::DAYNAMES, message: "Allowed names are #{Date::DAYNAMES}" }
 
   def currently_operating?
-    can_operate?(DateTime.now)
+    can_operate?(DateTime.now.utc)
   end
 
   def can_operate?(datetime)

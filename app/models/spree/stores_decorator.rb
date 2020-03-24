@@ -19,12 +19,12 @@ Spree::Store.class_eval do
 
   def closest_working_date_and_time
     current_datetime = DateTime.now.utc
-    # current_datetime = current_datetime.change({ hour: 0, minute: 0, second: 0 })
+    current_datetime = current_datetime.change(hour: 0, minute: 0, second: 0)
     todays_name = current_datetime.strftime("%A")
     sorted_days_from_today = DateTime::DAYNAMES.rotate(DateTime::DAYNAMES.index(todays_name))
 
     if currently_open?
-      return DateTime.now.utc
+      return DateTime.now.utc.round_off(15.minutes)
     else
       wds = working_days.includes(:working_hours)
 

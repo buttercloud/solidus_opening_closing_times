@@ -3,6 +3,7 @@ class Spree::Admin::WorkingHoursController < Spree::Admin::BaseController
 
   def create
     working_hour = @working_day.working_hours.new(working_hours_params)
+
     if !working_hour.save
       flash[:error] = working_hour.errors.full_messages.join(", ")
     end
@@ -12,7 +13,11 @@ class Spree::Admin::WorkingHoursController < Spree::Admin::BaseController
 
   def update
     working_hour = @working_day.working_hours.where(id: params[:id])
-    working_hour.try(:update, working_hours_params)
+
+    if working_hour.present?
+      flash[:error] = working_hour.errors.full_messages.join(",") if !working_hour.update(working_hours_params)
+    end
+
     redirect_to edit_admin_store_working_day_path(@store, @working_day)
   end
 
@@ -34,6 +39,6 @@ class Spree::Admin::WorkingHoursController < Spree::Admin::BaseController
   end
 
   def working_hours_params
-    params[:working_hour].permit(:start_time, :end_time)
+    params[:working_hour].permit(:start_time, :end_time, :description)
   end
 end

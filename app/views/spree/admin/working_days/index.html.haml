@@ -8,8 +8,8 @@
         .col-2= wd.name
         .col-6= wd.description
         .col-3
-          = link_to "Destroy", admin_store_working_day_path(@store.id, wd.id), class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure ?"}
           = link_to "Edit", edit_admin_store_working_day_path(@store.id, wd.id), class: "btn btn-warning"
+          = link_to "Destroy", admin_store_working_day_path(@store.id, wd.id), class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure ?"}
     %br
     %br  
     = form_for [:admin, :store, @store.working_days.new] do |f|
