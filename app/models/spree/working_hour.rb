@@ -1,4 +1,4 @@
-class Spree::WorkingHour < ApplicationRecord
+class Spree::WorkingHour < Spree::Base
   belongs_to :working_day
   validates :start_time, :end_time, presence: true
   validate :validate_interval

@@ -1,4 +1,4 @@
-class Spree::WorkingDay < ApplicationRecord
+class Spree::WorkingDay < Spree::Base
   belongs_to :store
   has_many :working_hours, dependent: :destroy
   validates :name, presence: true
